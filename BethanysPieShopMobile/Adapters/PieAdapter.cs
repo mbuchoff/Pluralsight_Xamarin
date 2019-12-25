@@ -20,6 +20,7 @@ namespace BethanysPieShopMobile.Adapters
     class PieAdapter : RecyclerView.Adapter
     {
         private List<Pie> _pies;
+        public event EventHandler<int> ItemClick;
 
         public PieAdapter()
         {
@@ -43,8 +44,14 @@ namespace BethanysPieShopMobile.Adapters
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.pie_viewholder, parent, false);
-            PieViewHolder pieViewHolder = new PieViewHolder(itemView);
+            PieViewHolder pieViewHolder = new PieViewHolder(itemView, OnClick);
             return pieViewHolder;
+        }
+
+        void OnClick(int position)
+        {
+            var pieId = _pies[position].PieId;
+            ItemClick?.Invoke(this, pieId);
         }
     }
 }
