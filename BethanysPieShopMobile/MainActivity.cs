@@ -10,7 +10,6 @@ namespace BethanysPieShopMobile
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
-        private string value;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,23 +41,17 @@ namespace BethanysPieShopMobile
         protected override void OnPause()
         {
             base.OnPause();
-            value = "OnPause";
-
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            value = "OnStart";
-
 
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            value = "OnResume";
-
         }
     }
 }

@@ -15,7 +15,7 @@ using BethanysPieShopMobile.Utility;
 
 namespace BethanysPieShopMobile
 {
-    [Activity(Label = "PieDetailActivity", MainLauncher = true)]
+    [Activity(Label = "PieDetailActivity")]
     public class PieDetailActivity : Activity
     {
         private PieRepository _pieRepository;
