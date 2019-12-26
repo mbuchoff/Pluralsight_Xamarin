@@ -4,12 +4,17 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
+using System;
 
 namespace BethanysPieShopMobile
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private Button _cartButton;
+        private Button _orderButton;
+        private Button _aboutButton;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -17,17 +22,46 @@ namespace BethanysPieShopMobile
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            Button myButton = FindViewById<Button>(Resource.Id.MyButton);
-            myButton.Click += MyButton_Click;
-
+            FindViews();
+            LinkEventHandlers();
         }
 
-        private void MyButton_Click(object sender, System.EventArgs e)
+        private void LinkEventHandlers()
         {
-            var toast = Toast.MakeText(this, "A button was clicked", ToastLength.Short);
-            toast.Show();
+            _orderButton.Click += OrderButton_Click;
+            _cartButton.Click += CartButton_Click;
+            _aboutButton.Click += AboutButton_Click;
+        }
 
-            var intent = new Intent(this, typeof(SecondActivity));
+        private void GoogleMapsButton_Click(object sender, EventArgs e)
+        {
+            var geolocation = Android.Net.Uri.Parse("geo:50.850346,4.351721");
+            var intent = new Intent(Intent.ActionView, geolocation);
+            StartActivity(intent);
+        }
+
+        private void FindViews()
+        {
+            _orderButton = FindViewById<Button>(Resource.Id.orderButton);
+            _cartButton = FindViewById<Button>(Resource.Id.cartButton);
+            _aboutButton = FindViewById<Button>(Resource.Id.aboutButton);
+        }
+
+        private void OrderButton_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(PieMenuActivity));
+            StartActivity(intent);
+        }
+
+        private void AboutButton_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(AboutActivity));
+            StartActivity(intent);
+        }
+
+        private void CartButton_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(CartActivity));
             StartActivity(intent);
         }
 
@@ -38,20 +72,6 @@ namespace BethanysPieShopMobile
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        protected override void OnPause()
-        {
-            base.OnPause();
-        }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-        }
     }
 }

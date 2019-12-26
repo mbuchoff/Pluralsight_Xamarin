@@ -26,7 +26,7 @@ namespace BethanysPieShopMobile
         private TextView _descriptionTextView;
         private TextView _priceTextView;
         private EditText _amountEditText;
-        private Button _addToCardButton;
+        private Button _addToCartButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,9 +34,27 @@ namespace BethanysPieShopMobile
             SetContentView(Resource.Layout.PieDetail);
             // Create your application here
             _pieRepository = new PieRepository();
-            _selectedPie = _pieRepository.GetPieById(1);
+            var selectedPieId = Intent.Extras.GetInt("selectedPieId");
+            _selectedPie = _pieRepository.GetPieById(selectedPieId);
             FindViews();
             BindData();
+            LinkEventHandlers();
+        }
+
+        private void LinkEventHandlers()
+        {
+            _addToCartButton.Click += _addToCartButton_Click;
+        }
+
+        private void _addToCartButton_Click(object sender, EventArgs e)
+        {
+            var amount = int.Parse(_amountEditText.Text);
+
+            ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepository();
+            shoppingCartRepository.AddToShoppingCart(_selectedPie, amount);
+            Toast.MakeText(Application.Context, "Pie added to cart", ToastLength.Long).Show();
+
+            this.Finish();
         }
 
         private void BindData()
@@ -59,7 +77,7 @@ namespace BethanysPieShopMobile
             _descriptionTextView = FindViewById<TextView>(Resource.Id.descriptionTextView);
             _priceTextView = FindViewById<TextView>(Resource.Id.priceTextView);
             _amountEditText = FindViewById<EditText>(Resource.Id.amountEditText);
-            _addToCardButton = FindViewById<Button>(Resource.Id.addToCartButton);
+            _addToCartButton = FindViewById<Button>(Resource.Id.addToCartButton);
         }
     }
 }
