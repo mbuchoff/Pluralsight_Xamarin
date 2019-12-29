@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.view.ViewPager
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/viewPager1">
+<android.support.v4.view.PagerTabStrip
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:paddingBottom="12dp"
+    android:paddingTop="10dp"
+    android:textColor="#000"/>
+</android.support.v4.view.ViewPager>

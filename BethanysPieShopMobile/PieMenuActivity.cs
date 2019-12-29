@@ -26,7 +26,7 @@ namespace BethanysPieShopMobile
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.pie_menu);
+            SetContentView(Resource.Layout.pie_menu_tabs);
             _pieRecyclerView = FindViewById<RecyclerView>(Resource.Id.pieMenuRecyclerView);
 
             _pieLayoutManager = new LinearLayoutManager(this);
@@ -38,10 +38,12 @@ namespace BethanysPieShopMobile
 
         private void _pieAdapter_ItemClick(object sender, int e)
         {
-            var intent = new Intent();
-            intent.SetClass(this, typeof(PieDetailActivity));
-            intent.PutExtra("selectedPieId", e);
-            StartActivity(intent);
+            using (var intent = new Intent())
+            {
+                intent.SetClass(this, typeof(PieDetailActivity));
+                intent.PutExtra("selectedPieId", e);
+                StartActivity(intent);
+            }
         }
     }
 }
