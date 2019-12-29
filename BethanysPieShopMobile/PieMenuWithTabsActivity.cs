@@ -8,13 +8,15 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.View;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using BethanysPieShopMobile.Adapters;
 
 namespace BethanysPieShopMobile
 {
     [Activity(Label = "PieMenuWithTabsActivity")]
-    public class PieMenuWithTabsActivity : Activity
+    public class PieMenuWithTabsActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -22,6 +24,8 @@ namespace BethanysPieShopMobile
             SetContentView(Resource.Layout.pie_menu_tabs);
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.piePager);
 
+            CategoryFragmentAdapter categoryFragmentAdapter = new CategoryFragmentAdapter(SupportFragmentManager);
+            viewPager.Adapter = categoryFragmentAdapter;
             // Create your application here
         }
     }

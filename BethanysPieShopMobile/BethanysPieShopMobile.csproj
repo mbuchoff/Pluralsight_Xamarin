@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutActivity.cs" />
+    <Compile Include="Adapters\CategoryFragmentAdapter.cs" />
     <Compile Include="Adapters\PieAdapter.cs" />
     <Compile Include="Adapters\ShoppingCartAdapter.cs" />
     <Compile Include="Assets\ImageHelper.cs" />
