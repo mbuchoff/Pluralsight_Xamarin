@@ -14,6 +14,8 @@ namespace BethanysPieShopMobile
         private Button _cartButton;
         private Button _orderButton;
         private Button _aboutButton;
+        private Button _tabsOrderButton;
+        private Button _googleMapsButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,6 +33,8 @@ namespace BethanysPieShopMobile
             _orderButton.Click += OrderButton_Click;
             _cartButton.Click += CartButton_Click;
             _aboutButton.Click += AboutButton_Click;
+            _tabsOrderButton.Click += TabsOrderButton_Click;
+            _googleMapsButton.Click += GoogleMapsButton_Click;
         }
 
         private void GoogleMapsButton_Click(object sender, EventArgs e)
@@ -45,6 +49,8 @@ namespace BethanysPieShopMobile
             _orderButton = FindViewById<Button>(Resource.Id.orderButton);
             _cartButton = FindViewById<Button>(Resource.Id.cartButton);
             _aboutButton = FindViewById<Button>(Resource.Id.aboutButton);
+            _tabsOrderButton = FindViewById<Button>(Resource.Id.tabsOrderButton);
+            _googleMapsButton = FindViewById<Button>(Resource.Id.googleMapsButton);
         }
 
         private void OrderButton_Click(object sender, System.EventArgs e)
@@ -56,6 +62,11 @@ namespace BethanysPieShopMobile
         private void AboutButton_Click(object sender, System.EventArgs e)
         {
             Intent intent = new Intent(this, typeof(AboutActivity));
+            StartActivity(intent);
+        }
+        private void TabsOrderButton_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(PieMenuWithTabsActivity));
             StartActivity(intent);
         }
 
