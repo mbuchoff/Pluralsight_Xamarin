@@ -21,17 +21,18 @@ namespace BethanysPieShopMobile
         private RecyclerView.LayoutManager _pieLayoutManager;
         private PieAdapter _pieAdapter;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.pie_menu_tabs);
+            SetContentView(Resource.Layout.pie_menu);
             _pieRecyclerView = FindViewById<RecyclerView>(Resource.Id.pieMenuRecyclerView);
 
             _pieLayoutManager = new LinearLayoutManager(this);
             _pieRecyclerView.SetLayoutManager(_pieLayoutManager);
             _pieAdapter = new PieAdapter();
+            await _pieAdapter.LoadData();
             _pieAdapter.ItemClick += _pieAdapter_ItemClick;
             _pieRecyclerView.SetAdapter(_pieAdapter);
         }
